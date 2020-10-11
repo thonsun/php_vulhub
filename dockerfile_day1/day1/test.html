@@ -1,0 +1,1334 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>
+        北邮体育馆  </title>
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/Wechat/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/Wechat/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/Wechat/css/main.css?date=20190809">
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/Wechat/css/register.css?date=20200820">
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/Wechat/css/mixed_payment.css">
+    <link rel="stylesheet" href="//storage.joyreserve.com/Public/static/custom/Wechat/Booking/confirm_booking.css">
+    <style>
+        .fileinput-img-preview {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: 1%;
+            align-items: end;
+        }
+
+        .fileinput-img-preview img {
+            height: 100px;
+            margin: 5px;
+            width: auto;
+        }
+
+        .g-file_upload {
+            height: 30px;
+            background: white;
+            width: 100%;
+            position: relative;
+        }
+
+        .g-file_upload p {
+            color: #ff870f;
+            height: 30px;
+            line-height: 30px;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+        .g-file_upload input {
+            opacity: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .g-submit {
+            background: #ff870f;
+            color: white;
+            width: 100%;
+            height: 45px;
+            border-radius: 4px;
+        }
+
+        .g-file_upload .file_upload {
+            height: 30px;
+        }
+
+        .fileinput-preview {
+            background: white;
+        }
+
+        .fileinput-preview li {
+            white-space: nowrap;
+            padding-right: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .fileinput-preview li span {
+            position: absolute;
+            height: 20px;
+            width: 30px;
+            top: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            line-height: 20px;
+            color: #ff870f;
+        }
+
+        .fileinput-preview-img {
+            position: relative;
+            display: inline;
+        }
+
+        .fileinput-preview-img span {
+            position: absolute;
+            color: #ff870f;
+            top: 0;
+            right: 4px;
+            font-size: 25px;
+            height: 25px;
+            line-height: 25px;
+        }
+    </style>
+
+    <!--confirm、alert弹框样式 start-->
+    <style type="text/css">
+        /*w-error-popup-white*/
+        .w-error-popup-white {
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .w-error-popup-white .w-error-back {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .8);
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+        }
+
+        .w-error-popup-white .w-error-inner {
+            background-color: #fff;
+            width: 90%;
+            top: 15%;
+            left: 50%;
+            margin-left: -45%;
+            text-align: center;
+            border-radius: 20px;
+            padding: 0;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .w-error-popup-white .w-error-inner h4 {
+            font-size: 20px;
+            color: #333;
+            padding: 16px 0;
+            margin: 0 32px;
+            border-bottom: 1px solid #e5e9ec;
+            font-weight: normal;
+        }
+
+        .w-error-popup-white .w-error-inner .w-error-content {
+            color: #333;
+            font-size: 16px;
+            line-height: 45px;
+            padding: 32px;
+            height: 270px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            text-align: left;
+        }
+
+        .w-close {
+            background: url(../images/result-error-x.png) no-repeat right 16px;
+            float: right;
+            right: 18px;
+            top: 0;
+            position: absolute;
+            z-index: 999;
+            width: 100px;
+            height: 85px;
+            cursor: pointer;
+            display: block;
+            background-size: 60%;
+        }
+
+
+        /*u-btn */
+        .u-btn {
+            padding: 16px;
+            background-color: #92c153;
+            border-bottom: 5px solid #7da646;
+            border-radius: 8px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            text-align: center;
+            color: white !important;
+            font-size: 20px;
+        }
+
+        .u-btn-red {
+            background-color: #ec7d69;
+            border-color: #e95c44;
+        }
+
+        #options {
+            box-sizing: border-box;
+            padding: 0px 30px;
+        }
+
+        div[option_name] {
+            padding: 10px 5px;
+        }
+
+        .select-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .select-item div {
+            flex: 0 0 22px;
+            height: 22px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #FF8A68;
+            margin-right: 5px;
+            font-weight: 700;
+        }
+
+        .select-item i {
+            font-size: 22px;
+            display: none;
+        }
+
+        .select-item span {
+            text-align: left;
+            flex-grow: 1;
+            font-size: 20px;
+        }
+
+        #modal4 .modal-header {
+            height: 30px;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            border-radius: 15px;
+        }
+        .member-tip {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<header class="header">
+    <div class="header-title">
+        <div class="col-xs-2">
+            <a href="javascript: history.go(-1);"><img src="//storage.joyreserve.com/Public/Wechat/img/left.png" /></a>
+        </div>
+        <div class="col-xs-8">
+            <h1 id="cg-click" class="title">确认预约</h1>
+        </div>
+    </div>
+</header>
+
+<!-- 所有页面都共享confirm提示框 start-->
+<div id="w-error-popup-white" style="display: none;" class="w-error-popup-white">
+    <div class="w-error-back">
+    </div>
+    <div class="w-error-inner">
+        <div id="w-confirm-content" class="w-error-content" style="height: auto; font-size: 26px;">
+            手机号存在是否前往登录      </div>
+        <div class="btn" style="width:100%; padding: 1rem; text-align: right;">
+            <a class="u-btn u-btn-red" href="javascript:canclePopup();">取消</a>
+            <a id="sure" class="u-btn" href="javascript:sure();">前往</a>
+        </div>
+    </div>
+</div>
+<!-- 所有页面都共享confirm提示框 end-->
+
+<div class="new-list g-new-list-blank">
+    <ul>
+        <li>
+            <span class="ba-ml-3 shop-det"> 类型</span>
+            <span class="tilps">健身房                  </span>
+        </li>
+        <li>
+            <span class="ba-ml-3 shop-det"> 场地</span>
+            <span class="tilps">健身房</span>
+        </li>
+        <div class="ba-clear"></div>
+    </ul>
+    <div class="g-time-list">
+        <a href="" data-toggle="modal" id="">
+            <span class="g-time-list-title">时间</span>
+            <div class="g-time-list-content">
+                <p>
+                    2020-10-01&nbsp;20:00-21:20              </p>
+            </div>
+        </a>
+    </div>
+
+
+    <ul>
+
+    </ul>
+</div>
+
+<form id="form-sub" action='/index.php/Wechat/Register/register_show' method="post" enctype="multipart/form-data">
+
+    <!-- 表单提交的唯一有效标识，一次之后失效，防止多次提交-->
+    <input type='hidden' name='form_valid_code_value' id='form_valid_code_value' value="1601440347" />
+
+    <input type='hidden' name='custom_class_ids' id='custom_class_ids'
+           value="" />
+    <input type='hidden' name='country_id' id='country_id' value="" />
+    <input type='hidden' name='country_name' id='country_name' value="" />
+    <input type='hidden' name='area_id' id='area_id' value="5985" />
+    <input type='hidden' name='area_name' id='area_name' value="健身房" />
+
+    <input type='hidden' name='room_id' id='room_id' value="15415" />
+    <input type='hidden' name='room_name' id='room_name' value="健身房" />
+    <input type='hidden' name='device_id' id='device_id' value="0" />
+    <input type='hidden' name='selected_device_name' id='selected_device_name' value="" />
+    <input type='hidden' name='soft_id' id='soft_id' value="0" />
+    <input type='hidden' name='selected_soft_name' id='selected_soft_name' value="" />
+    <input type='hidden' name='time_id' id='time_id' value="2020100107" />
+    <input type='hidden' name='total_amount' id='total_amount' value="0" />
+    <input type="hidden" name="times_arr" value="Array" id='times_arr'>
+    <input type="hidden" name="packages_showing_type" value="2"
+           id='packages_showing_type'>
+    <!-- 混合支付类型支付类型 -->
+    <input type='hidden' name='mixed_payment_type' id='mixed_payment_type' value="0" />
+    <!-- 如果是选用套餐支付，将使用的套餐id -->
+    <input type='hidden' name='to_use_vip_id' id='to_use_vip_id' value="0" />
+
+    <!-- 遍历时间段 -->
+    <input type='hidden' name='times_arr_1' id='times_arr_1' value="08:00-09:20" /><input type='hidden' name='times_arr_2' id='times_arr_2' value="10:00-11:20" /><input type='hidden' name='times_arr_3' id='times_arr_3' value="12:00-13:20" /><input type='hidden' name='times_arr_4' id='times_arr_4' value="14:00-15:20" /><input type='hidden' name='times_arr_5' id='times_arr_5' value="16:00-17:20" /><input type='hidden' name='times_arr_6' id='times_arr_6' value="18:00-19:20" /><input type='hidden' name='times_arr_7' id='times_arr_7' value="20:00-21:20" /><input type='hidden' name='times_arr_8' id='times_arr_8' value="17:00-18:20" /><input type='hidden' name='times_arr_9' id='times_arr_9' value="19:00-20:20" /><input type='hidden' name='times_arr_10' id='times_arr_10' value="21:00-22:20" />
+    <!-- 是否来自排队 -->
+    <input type='hidden' name='is_queue' id='is_queue'
+           value="0" />
+
+    <!-- 当该预约对象下没有预约可选项时，是否不显示整个框 -->
+    <input type='hidden' id='is_not_show_optional_device_and_soft'
+           value="1">
+
+    <div id='fill_box'>
+        <!-- 自定义订单信息 start-->
+        <div id='reservation_fields'>
+        </div>
+        <!-- 自定义订单信息 end-->
+
+        <!--选择折扣卡start-->
+
+        <div id="is_have_any_card">
+            <div class='discount'>
+                支付优惠
+            </div>
+            <div class="new-list" style="margin-top:0px;">
+                <ul>
+                    <li id="discount_and_member_select" onclick="discount_and_member_select(this)">
+                        <a href="" data-toggle="modal">
+                            <span id="one_discount" style="color: #999;font-size: 15px;" class="ba-ml-3">请选择</span>
+                            <span id="type_discount" style="color: red; float: right; font-size: 15px;">
+                    </span>
+                            <i id="jiantou" class="icon icon-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>      <!--选择折扣卡start-->
+    </div>
+    <!--把下面两个合并成底部浮框,请先后台配置开启支付功能-->
+    <div class="nav-submit">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="total-money" id="member_card">
+                    <!--总额: ￥<span id='total_amount_1'>0.00</span>元-->
+
+
+                    <span>正常价</span>            </div>
+
+            </div>
+
+
+
+            <div class="col-xs-4" id='submit_button'>
+                <input type="button" id="form-submit" value="确认预约"
+                       onclick="submitForm(this);" />        </div>
+
+        </div>
+    </div>
+
+
+    <!-- 一个人是否占用了多个名额 -->
+    <input type="hidden" id='occupy_quota' name='occupy_quota' value="1">
+
+    <!-- 登录注册 弹框模式 列表模式（不再出现弹框，直接填写表单，等同于取消了登录注册） -->
+    <input type="hidden" id='sign_and_login_type' name='sign_and_login_type'
+           value="1">
+
+</form>
+
+<input type='hidden' id='is_open_mixed_payment'
+       value="1">
+
+
+<!--套餐次卡支付时，是否显示未购买套餐-->
+<input type='hidden' id='is_not_show_no_times_package'
+       value="0">
+
+<input type='hidden' id='basic_is_use_phone_login'
+       value="0">
+<input type='hidden' id='basic_is_just_login'
+       value="0">
+<input type='hidden' id='source_url'
+       value="http://reservation.bupt.edu.cn/index.php/Wechat/Booking/confirm_booking?area_id=5985&td_id=15415_2020100107&query_date=20201001&country_id=0">
+
+<input type='hidden' id='is_phone_login' value="1">
+
+<input type="hidden" id='is_open_pay_function'
+       value="1">
+
+<!--是否不使用余额支付-->
+<input type="hidden" id='is_use_remainder_pay'
+       value="1">
+
+<!--是否不使用会员价-->
+<input type="hidden" id='is_use_member_price'
+       value="1">
+
+<input type="hidden" id='is_use_member_price_and_discount_price'
+       value="0">
+
+<!--是否开启 预约选项一 -->
+<input type="hidden" id="device_name"
+       value="设备._">
+<input type="hidden" id='basic_is_active_device'
+       value="0">
+
+<!--是否必填 预约选项一 -->
+<input type="hidden" id='basic_is_must_fill_device'
+       value="0">
+
+<!--是否开启 预约选项二 -->
+<input type="hidden" id="soft_name"
+       value="服务">
+<input type="hidden" id='basic_is_active_soft'
+       value="0">
+
+<!--是否必填 预约选项二 -->
+<input type="hidden" id='basic_is_must_fill_soft'
+       value="0">
+<!-- 是否是折扣卡 -->
+
+<!--是否开启 备注框 -->
+<input type="hidden" id='basic_is_active_msgboard'
+       value="0">
+<!--是否必填备注框-->
+<input type="hidden" id='basic_is_must_fill_msgboard'
+       value="0">
+
+<input type="hidden" id='room_pic_base_url' value="//storage-prod.joyreserve.com/uploads/room_pic/">
+<input type="hidden" id='device_pic_base_url' value="//storage-prod.joyreserve.com/uploads/device_pic/">
+<input type="hidden" id='soft_pic_base_url' value="//storage-prod.joyreserve.com/uploads/soft_pic/">
+<input type="hidden" id='oss_user_url' value="https://storage.joyreserve.com/upload/">
+
+<!--预约可选项一 start-->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title2">选择设备._</h4>
+            </div>
+            <div class="modal-body" id='devices'>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--预约可选项一 end-->
+
+<!--预约可选项二 start-->
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title3">选择服务</h4>
+            </div>
+            <div class="modal-body" id='softs'>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--预约可选项二 end-->
+
+
+<!--当自定义可选项是选项时 start-->
+<div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <!-- <h4 class="modal-title" id="modal-title4">选择</h4> -->
+            </div>
+            <div class="" id='options'>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--当自定义可选项是选项时 end-->
+
+
+<!--当有折扣卡和会员卡优惠时start-->
+<div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title5">选择优惠</h4>
+            </div>
+            <div class="modal-body" id='discount'>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--当有折扣卡和会员卡优惠时end-->
+
+<input type='hidden' id='basic_is_allow_multiple_time' value="1">
+<input type='hidden' id='basic_is_open_pay_function' value="1">
+<input type='hidden' id="room_price_15415" value="16.00">
+<input type='hidden' id="area_price_5985" value="0.00">
+
+
+<!-- 是否有有效的会员卡（价格卡） -->
+<input type='hidden' id='member_card_record_id'
+       value="0">
+
+
+
+
+
+<!-- 是否开启 "追随第一个用户的选择" -->
+<input type='hidden' id='is_active_first_order_device' value="0">
+<input type='hidden' id='start_timestamp' value="">
+<input type='hidden' id='end_timestamp' value="">
+
+<!-- 如果开启 追随第一个用户的选择，第一个订单已经选择的设备id -->
+<input type="hidden" id="have_selected_device_id" value="0">
+
+<!--有会员卡的情况下-->
+
+
+
+<!--所有折扣卡的id-->
+
+<!--没有会员卡的情况下-->
+
+<input type='hidden' id="no_card_price" value="16">
+
+
+<input type='hidden' id="no_card" value="尚未开通会员">
+
+<!--用户有的vip的id拼接的字符串,如1,2,3-->
+<input type='hidden' id="vip_id_str" value="0">
+
+<!-- 是否有有效的会员卡（价格卡） start-->
+<input type='hidden' class="member_card_record_id" value=" ">
+<input type='hidden' class="member_card_id" value=" ">  <!-- 是否有有效的会员卡（价格卡） end-->
+
+<!--点击确认预约之后所需的参数 这些参数是要传到get_balance_and_packages_of_one_user-->
+<input type='hidden' id='discount_vip_id' value="0" />
+<input type='hidden' id='discount_vip_type' value="0" />
+<input type='hidden' id='discount_vip_discount' value="0" />
+<input type='hidden' id='discount_vip_name' value="0" />
+<input type='hidden' id='discount_vip_price' value="0" />
+
+<!--保存一个默认的radio的选项的id-->
+<input type="hidden" id="seleced_card_id" value="0" />
+
+
+<!-- 是否开启不同时间段，价格不同 -->
+<input type='hidden' id='time_price_type' value="0">
+
+
+
+<!-- 是否开启 预约分类价格系统 start-->
+<input type='hidden' id='is_active_area_price'
+       value="0">
+<!-- 是否开启 预约分类价格系统 end-->
+
+<!-- 是否开启 预约分类价格模式 start-->
+<input type='hidden' id='area_price_mode'
+       value="1">
+<!-- 是否开启 预约分类价格模式 end-->
+
+<!-- 登录注册框 -->
+<div id="login-reg">
+    <div class="modal fade" id="phone_login" tabindex="-1" role="dialog" aria-labelledby="registerLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-xs-4 col-xs-offset-2">
+                            <a href="#" class="active" id="reg-btn">注册</a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#" id="login-btn">已有账号</a>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-header -->
+                <div class="modal-body" style="max-height:400px; overflow: auto;">
+
+                    <div id="reg-form">
+                        <div class="form-group">
+                            <input type="text" name="username" id='username' class="input_frame"
+                                   placeholder="姓名" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="phone" id="phone" class="input_frame"
+                                   placeholder="请输入你的手机号码" />
+                            <span id="checkInfo" style="display: none;">请填写正确的手机号码！</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" id='password' class="input_frame"
+                                   placeholder="请输入你的密码" />
+                        </div>
+
+
+                        <!-- 学号/工号 start-->
+                        <input type='hidden' id='basic_is_active_register_number'
+                               value="1">
+                        <input type='hidden' class="input_frame" id='basic_is_must_register_number'
+                               value="0">
+
+                        <div class="form-group">
+                            <input class=" input_frame" name="number" id='number' type="text" placeholder="学号/工号" />                </div>              <!-- 学号/工号 end-->
+
+                        <input type='hidden' id='basic_is_active_register_sex'
+                               value="1">
+                        <div class="form-group">
+                            <select name="sex" class="input_frame" id='sex'>
+                                <option value="1">男</option>
+                                <option value="0">女</option>
+                            </select>
+                        </div>
+
+
+
+                        <input type='hidden' class="input_frame" id='basic_is_must_register_email'
+                               value="0">
+                        <input type='hidden' id='basic_is_active_register_email'
+                               value="1">
+                        <div class="form-group">
+
+                            <input type="text" name="email" id='email' class="input_frame"
+                                   placeholder="邮箱" />
+                        </div>
+
+                        <input type='hidden' class="input_frame" id='basic_is_must_register_id_card'
+                               value="0">
+                        <input type='hidden' id='basic_is_active_register_id_card'
+                               value="0">
+
+
+
+                        <!-- 公司部门字段 start -->
+                        <input type='hidden' id='basic_is_active_personal_department'
+                               value="3">
+                        <input type='hidden' class="input_frame" id='basic_is_must_register_department'
+                               value="0">
+
+
+                        <div class="login_input" style="margin-top:28px;">
+                            <div class="icon-invite">
+                                <input class=" input_frame" name="department" id='department' type="text" placeholder="部门" />                  </div>
+                        </div>
+                        <!-- 公司部门字段 end -->
+
+                        <!-- 显示自定义的用户信息字段 start -->
+
+
+                        <!-- 显示自定义的用户信息字段 end -->
+
+                        <input type="button" value="立即注册" class="btn btn-block" onclick='ajax_sign(this);' />
+                    </div>
+                    <!--注册表单-->
+                    <div id="login-form">
+                        <div class="form-group">
+                            <input type="text" name="phone" id='sign_phone' class="input_frame"
+                                   placeholder="请输入你的手机号码" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" id='sign_password' class="input_frame"
+                                   placeholder="请输入你的密码" />
+                        </div>
+                        <div class="form-bottom">
+                            <a href="/index.php/Wechat/Personal/forget_password" style="font-size: 13px;color: #337ab7;"
+                               id='forget_password'>忘记密码</a>
+                            <input type="submit" value="立即登录" class="btn btn-login" onclick='ajax_login();' />
+                        </div>
+                    </div>
+                    <!--登录表单-->
+
+                </div><!-- /.modal-body -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+<!-- 登录注册框 -->
+
+<!-- 缓冲提示条 -->
+
+<div class="hw-overlay hidden" id="buffer">
+    <div class="hw-layer-wrap">
+        <!-- <span class="hwLayer-close">X</span> -->
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <h4 id='tip_title'>注意</h4>
+                <p id='buffer_tip'>不允许一次预约两个不同的预约对象,可预约同一个对象一天内的多个时段</p>
+                <button class="btn btn-success" id='hwLayer-ok' onclick="buffer_tip_hidden(); "
+                        style="border-color: #4cae4c;">确 定</button>
+                <!-- <button class="btn btn-warning hwLayer-cancel">取 消</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 缓冲提示条 -->
+
+
+
+<!-- 混合支付 start -->
+
+<div class="modal fade" id="mixed_payment_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <input type="hidden" id='wechat_pay_txt' value="微信支付">
+            <input type="hidden" id='balance_pay_txt' value="余额支付">
+            <input type="hidden" id='need_pay_txt' value="需支付">
+            <input type="hidden" id='current_balance_txt' value="当前余额">
+            <input type="hidden" id='top_up_txt' value="充值">
+            <input type="hidden" id='bundles_txt' value="套餐支付">
+            <input type="hidden" id='need_deduct_txt' value="需扣除 ">
+            <input type="hidden" id='remain_txt' value=" 剩余可约时间段个数 ">
+            <input type="hidden" id='need_to_buy_txt' value="购买">
+            <input type="hidden" id='enets_pay_txt' value="Visa|Master|eNets支付">
+            <input type="hidden" id='alipay_pay_txt' value="支付宝支付">
+            <input type="hidden" id='paypal_pay_txt' value="Paypal支付">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div aria-hidden="true">&times;</div>
+                </button>
+                <div>
+                    <h4 class="modal-title" id="myModalLabel">请选择支付方式</h4>
+                </div>
+            </div>
+            <hr
+                    style="height:1px;border:none;border-top:1.5px solid #f3f4f8;width:80%;margin-left:10%;margin-top:0px;margin-bottom:0px;" />
+            <div class="modal-body">
+                <div class='row' id='balance_pay_type'>
+                    <div class='col-xs-1'>
+                        <input type='radio' name='payment_type' id='balance_pay'>
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'><label for='balance_pay'>余额支付</label></div>
+                    </div>
+                    <div class='package'>
+                        <div class='col-xs-1'>
+
+                        </div>
+                        <div class='col-xs-8'>
+                            <label for='balance_pay'>当前余额 25元</label>
+                        </div>
+                        <div class='col-xs-2'>
+                            <button type='button' class='btn btn-primary green_btn'>充值</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='row' id='package_pay_type'>
+                    <div class='col-xs-1'>
+
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'>套餐支付</div>
+                    </div>
+
+                    <div class='package'>
+                        <div class='col-xs-1'>
+                            <input type='radio' name='payment_type' id='package_pay_1'>
+                        </div>
+                        <div class='col-xs-8'>
+                            <label for='package_pay_1'>黄钻 剩余2次</label>
+                        </div>
+                        <div class='col-xs-2'>
+                            <button type='button' class='btn btn-primary orange_btn' style="font-size: 14px;">购买</button>
+                        </div>
+                    </div>
+                </div>
+                <!--微信支付 start-->
+                <div class='row' id='wechat_pay_type'>
+                    <div class='col-xs-1'>
+                        <input type='radio' style="margin-top:0px;" name='payment_type' id='wechat_pay'>
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'><label for="wechat_pay">微信支付</label></div>
+                    </div>
+                </div>
+                <!--微信支付 end-->
+
+                <!--eNets支付 start-->
+                <div class='row' id='enets_pay_type'>
+                    <div class='col-xs-1'>
+                        <input type='radio' style="margin-top:0px;" name='payment_type' id='enets_pay'>
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'><label for="enets_pay">Visa支付</label></div>
+                    </div>
+                </div>
+                <!--eNets支付 end-->
+
+                <!--支付宝支付 start-->
+                <div class='row' id='alipay_pay_type'>
+                    <div class='col-xs-1'>
+                        <input type='radio' style="margin-top:0px;" name='payment_type' id='alipay_pay'>
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'><label for="alipay_pay">支付宝支付</label></div>
+                    </div>
+                </div>
+                <!--支付宝支付 end-->
+
+                <!--paypal支付 start-->
+                <div class='row' id='paypal_pay_type'>
+                    <div class='col-xs-1'>
+                        <input type='radio' style="margin-top:0px;" name='payment_type' id='paypal_pay'>
+                    </div>
+                    <div class='col-xs-10'>
+                        <div class='payment_type'><label for="paypal_pay">Paypal支付</label></div>
+                    </div>
+                </div>
+                <!--paypal支付 end-->
+
+            </div>
+            <div class="modal-footer" style="border-top: 0px solid #e5e5e5;">
+                <button type="button" class="btn btn-primary g-submit"
+                        onclick="confirm_mixed_payment_type(this);">确认支付</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 混合支付 end -->
+
+
+
+
+<input type="hidden" id='register_member_text' value="会员价" />
+<input type="hidden" id='register_general_text' value="正常价" />
+<input type="hidden" id='register_discount_text' value="折扣价" />
+
+<!-- 文案中英文 js用 end-->
+
+<!-- 文案中英文 js用 start-->
+<input type="hidden" id='js_txt_required'
+       value="必填">
+<input type="hidden" id='js_txt_note_required'
+       value="备注框必填">
+<input type="hidden" name="" value="" id="query_date_time">
+<!-- 文案中英文 js用 end-->
+<input type="hidden" id="currency_symbol" value="￥" />
+
+
+
+<script src="//storage.joyreserve.com/Public/Wechat/js/jquery.min.js"></script>
+<script src="//storage.joyreserve.com/Public/Wechat/js/bootstrap.min.js"></script>
+<script src="//storage.joyreserve.com/Public/Wechat/js/register.js?date=20200609"></script>
+<script src="//storage.joyreserve.com/Public/Wechat/js/index.js?date=201912011404"></script>
+<script src="//storage.joyreserve.com/Public/Wechat/js/common.js"></script>
+<script src="//storage.joyreserve.com/Public/static/js/login.js"></script>
+<script>
+    // var actual_time = 'Array'
+    $(function () {
+        var login = new Login("Alex", { initShow: true, is_need_login: true })
+        /** 预约可选项开启多选还是单选 start */
+        window.isMoreSelectDevice = "0";
+        window.isMoreSelectSoft = "";
+        /** 预约可选项开启多选还是单选 end */
+
+
+        if ($("#modal0 .row").size() == 1) {
+            $("#modal0 .row:eq(0)").click();
+        }
+
+        // 自动执行获取可选项一，可选项二
+        var room_id = $('#room_id').val();
+        get_all_devices(room_id);
+        get_all_softs(room_id);
+
+
+        /** 检测是否开启 "追随第一个用户选择" 并且是否同时开启 预约可选项一必填  start**/
+        var is_active_first_order_device = $('#is_active_first_order_device').val();
+        var basic_is_must_fill_device = $('#basic_is_must_fill_device').val();
+        if (is_active_first_order_device == 1 && basic_is_must_fill_device == 1) {
+            var start_timestamp = $('#start_timestamp').val();
+            var end_timestamp = $('#end_timestamp').val();
+            get_devices_by_time_interval(room_id, start_timestamp, end_timestamp);
+        }
+        /** 检测是否开启 "追随第一个用户选择" 并且是否同时开启 预约可选项一必填  end**/
+
+
+
+        // 检测默认的时间是否空闲和连续
+        change_price_after_multi_reserve();
+
+        $('#requiredTitle,#message').on('click', function () {
+            $('.nav-submit').css({ 'position': 'static' })
+        });
+        $('#requiredTitle,#message').on('blur', function () {
+            $('.nav-submit').css({ 'position': 'fixed' })
+        });
+
+    });
+
+    //隐藏提示框
+    $('.hwLayer-cancel,.hwLayer-close').on('click', function () {
+        buffer_tip_hidden();
+    });
+
+    //文件列表
+    let fileList = {};
+    // 最大允许上传图片大小
+    const $max_size_kb = 5000;
+
+    $('.file_upload').on('change', function (e) {
+        // 字段的id
+        $("#cg-text").html("以触发上传函数")
+        const field_id = $(this).attr('data-reservation-fields-id')
+        const type = $(this).attr("data-file-type")
+
+        if (!fileList[field_id]) {
+            fileList[field_id] = []
+        }
+
+        let files = fileList[field_id]
+
+        const uploadFile = $(this).get(0).files
+
+        let isVerify = false
+
+        let isPostfix = false
+
+        if (uploadFile.length + files.length > 5) {
+            type === "image" ? alert("最多只允许上传五张图片") : alert("最多只允许上传五个文件")
+            return;
+        }
+
+        const temp = []
+
+        for (let index in uploadFile) {
+            if (uploadFile[index] instanceof File) {
+                uploadFile[index].postfix = uploadFile[index].name.split(".")[uploadFile[index].name.split(".").length - 1]
+                temp.push(uploadFile[index])
+            }
+        }
+
+        temp.forEach(item => {
+            if (item.size > $max_size_kb * 1024 || item.size === 0) {
+                isVerify = true;
+            }
+        })
+
+        if (type === "file") {
+            temp.forEach(item => {
+                if (
+                    item.postfix !== "txt" &&
+                    item.postfix !== "doc" &&
+                    item.postfix !== "docx" &&
+                    item.postfix !== "pdf" &&
+                    item.postfix !== "xlsx" &&
+                    item.postfix !== "xls") {
+                    alert('文件格式不合法');
+                    isPostfix = true
+                }
+            })
+        }
+        if (isPostfix) {
+            return
+        }
+
+
+        if (isVerify) {
+            type === "image" ? alert('请选择大小在5M以内的图片') : alert('请选择大小在5M以内容不为空的文件');
+            isVerify = false;
+            return;
+        }
+
+        fileList[field_id] = [...files, ...temp]
+        files = fileList[field_id]
+
+        const handleFile = new Promise(resolve => {
+            files.forEach((item, index) => {
+                //创建用来读取此文件的对象
+
+                let reader = new FileReader();
+                let file = type === "image" ? new Image() : new String();
+                //使用该对象读取file文件
+                reader.readAsDataURL(item);
+                //读取文件成功后执行的方法函数
+                reader.onload = function (e) {
+                    // 图片加载完毕之后进行压缩，然后上传
+                    if (type === "image") {
+                        file.src = this.result;
+                        file.complete ? callback() : file.onload = callback;
+                    } else {
+                        file = this.result;
+                        callback();
+                    }
+                }
+
+                function callback() {
+                    type === "image" ? item.src = compress(file) : item.src = file;
+                    if (index === files.length - 1) {
+                        resolve();
+                    }
+                }
+            })
+        })
+
+        $(this).val(null)
+        handleFile.then(() => {
+            setFileInputValue(field_id, files, type)
+            $(this).attr("type", "file")
+        });
+    })
+
+    //渲染文件列表填充内容
+    function setFileInputValue(field_id, files, type) {
+        if (type === "image") {
+            $('#file_img_reservation_fields_' + field_id).html(files.map((item, index) => `
+                    <div class="fileinput-preview-img">
+                        <img src="${item.src}">
+                        <span onclick="handleClickFileRemoveButton('${field_id}','${type}','${item.name}')">×</span>
+                    </div>
+                    `).join("")
+            );
+        } else {
+            $('#file_reservation_fields_' + field_id).html(files.map((item, index) => `
+                    <li>${item.name}<span onclick="handleClickFileRemoveButton('${field_id}','${type}','${item.name}')">×</span></li>`).join("")
+            );
+        }
+        $('#reservation_fields_' + field_id).val(files.map(item => `${item.src},${item.postfix}`).join("_"));
+    }
+
+    function handleClickFileRemoveButton(field_id, type, name) {
+        fileList[field_id].splice(fileList[field_id].findIndex(item => item.name === name), 1)
+        setFileInputValue(field_id, fileList[field_id], type)
+    }
+
+    /**
+     * 压缩图片
+     * @param  {[type]} img [description]
+     * @return {[type]}     [description]
+     */
+    function compress(img) {
+
+        //    用于压缩图片的canvas
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext('2d');
+
+        //    瓦片canvas
+        var tCanvas = document.createElement("canvas");
+        var tctx = tCanvas.getContext("2d");
+
+
+        var initSize = img.src.length;
+        var width = img.width;
+        var height = img.height;
+
+        //如果图片大于四百万像素，计算压缩比并将大小压至400万以下
+        var ratio;
+        if ((ratio = width * height / 4000000) > 1) {
+            ratio = Math.sqrt(ratio);
+            width /= ratio;
+            height /= ratio;
+        } else {
+            ratio = 1;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        //        铺底色
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        //如果图片像素大于100万则使用瓦片绘制
+        var count;
+        if ((count = width * height / 1000000) > 1) {
+            count = ~~(Math.sqrt(count) + 1); //计算要分成多少块瓦片
+
+            //            计算每块瓦片的宽和高
+            var nw = ~~(width / count);
+            var nh = ~~(height / count);
+
+            tCanvas.width = nw;
+            tCanvas.height = nh;
+
+            for (var i = 0; i < count; i++) {
+                for (var j = 0; j < count; j++) {
+                    tctx.drawImage(img, i * nw * ratio, j * nh * ratio, nw * ratio, nh * ratio, 0, 0, nw, nh);
+
+                    ctx.drawImage(tCanvas, i * nw, j * nh, nw, nh);
+                }
+            }
+        } else {
+            ctx.drawImage(img, 0, 0, width, height);
+        }
+
+        //进行最小压缩
+        var ndata = canvas.toDataURL("image/jpeg", 1.0);
+
+        console.log("压缩前：" + initSize);
+        console.log("压缩后：" + ndata.length);
+        console.log("压缩率：" + ~~(100 * (initSize - ndata.length) / initSize) + "%");
+
+        tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;
+
+        return ndata;
+    }
+</script>
+
+<script>
+    // 根据房间id获取其所属硬件
+    function get_all_devices(room_id) {
+        var objectModel = {};
+        objectModel['id'] = room_id;
+
+        function getDomain() {
+            var domain = document.domain;
+            if (domain == 'localhost') {
+                //TODO: 这里需要根据实际情况进行修改
+                /*domain+='/weixin';*/
+                domain += '/reserve/1';
+            }
+            return domain;
+        }
+
+        var domain = getDomain();
+        var toUrl = protocol + '//' + domain + "/index.php/API/Room/get_room_devices";
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: toUrl,
+            dataType: "json",
+            data: objectModel,
+            timeout: 30000,
+            error: function () {
+                alert(toUrl);
+            },
+            success: function (data) {
+                var is_open_pay_function = parseInt($('#is_open_pay_function').val());
+                var basic_is_show_object_price = parseInt($('#basic_is_show_object_price').val());
+                var is_use_remainder_pay = parseInt($('#is_use_remainder_pay').val());  // 是否开启余额支付
+                var is_open_mixed_payment = parseInt($('#is_open_mixed_payment').val());  // 是否开启了混合支付
+                var is_not_show_optional_device_and_soft = parseInt($('#is_not_show_optional_device_and_soft').val());  // 当该预约对象下没有预约可选项时，是否不显示整个框
+
+                var pic_base_url = $('#device_pic_base_url').val();
+                $("#devices").empty();
+                var b = "";
+                if (data.status) {
+                    var count = data['devices'].length;
+
+                    for (var i = 0; i < count; i++) {
+                        if (data['devices'][i]['url'] && data['devices'][i]['url'].indexOf('oss-') === 0) {
+                            pic_base_url = $('#oss_user_url').val();
+                        } else {
+                            pic_base_url = $('#device_pic_base_url').val();
+                        }
+
+                        b += `<div
+                            class='row g-select-more-border'
+                            id='${data['devices'][i]['id']}'
+                            option_name='${data['devices'][i]['name']}'
+                            onclick='handle_click_from_devices(this)'>
+                            <div class='col-xs-4'>
+                                <div class='img-box'>
+                                <img src='${pic_base_url + (data['devices'][i]['url'] ? data['devices'][i]['url'] : 'user.jpg')}' alt=''>
+                                </div>
+                            </div>
+                            <div class='${parseInt(window.isMoreSelectDevice) ? 'col-xs-6' : 'col-xs-8'}'>
+                            ${is_open_pay_function == 1 || basic_is_show_object_price == 1 || (is_use_remainder_pay == 1 && is_open_mixed_payment == 1) ?
+                            `<h5>${data['devices'][i]['name']}(${currency_symbol}${data['devices'][i]['price']})</h5>` :
+                            `<h5>${data['devices'][i]['name']}</h5>`}
+                                <div class='ui star rating' data-rating='3'></div>
+                                <span>${data['devices'][i]['describe']}</span>
+                            </div>
+                            ${parseInt(window.isMoreSelectDevice) ? `
+                            <div class='col-xs-2'>
+                                <div class="g-select-input-border">
+                                    <div class="g-select-input-content"></div>
+                                </div>
+                            </div>
+                            `: ""}
+                            </div>
+                            ${is_open_pay_function == 1 || basic_is_show_object_price == 1 || (is_use_remainder_pay == 1 && is_open_mixed_payment == 1) ?
+                            `<input type='hidden' id='device_price_${data['devices'][i]['id']}' value='${data['devices'][i]['price']}'/>` : ""}
+                          `
+                    }
+                } else {
+
+                    // 当该预约对象下没有预约可选项时，是否不显示整个框
+                    if (is_not_show_optional_device_and_soft == 1) {
+                        $('#optional_module_1').addClass('hide');
+                    }
+                    else {
+                        b += "<div class='row'><div class='blank'>该项下暂无数据</div></div>"
+                    }
+
+                }
+                $("#devices").append(b);
+            },
+        });
+    }
+
+    //根据房间id获取其所属软件
+    function get_all_softs(room_id) {
+        var objectModel = {};
+        objectModel['id'] = room_id;
+
+        function getDomain() {
+            var domain = document.domain;
+            if (domain == 'localhost') {
+                //TODO: 这里需要根据实际情况进行修改
+                /*domain+='/weixin';*/
+                domain += '/reserve/1';
+            }
+            return domain;
+        }
+
+
+        var domain = getDomain();
+        var toUrl = protocol + '//' + domain + "/index.php/API/Room/get_room_softs";
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: toUrl,
+            dataType: "json",
+            data: objectModel,
+            timeout: 30000,
+
+
+            error: function () {
+                alert(url);
+            },
+            success: function (data) {
+                var is_open_pay_function = parseInt($('#is_open_pay_function').val());
+                var basic_is_show_object_price = parseInt($('#basic_is_show_object_price').val());
+                var is_use_remainder_pay = parseInt($('#is_use_remainder_pay').val());  // 是否开启余额支付
+                var is_open_mixed_payment = parseInt($('#is_open_mixed_payment').val());  // 是否开启了混合支付
+                var is_not_show_optional_device_and_soft = parseInt($('#is_not_show_optional_device_and_soft').val());  // 当该预约对象下没有预约可选项时，是否不显示整个框
+
+                var pic_base_url = $('#soft_pic_base_url').val();
+                $("#softs").empty();
+
+                var b = "";
+                if (data.status) {
+                    var count = data['softs'].length;
+                    for (var i = 0; i < count; i++) {
+                        if (data['softs'][i]['url'] && data['softs'][i]['url'].indexOf('oss-') === 0) {
+                            pic_base_url = $('#oss_user_url').val();
+                        } else {
+                            pic_base_url = $('#device_pic_base_url').val();
+                        }
+
+                        b += `<div
+                        class='row g-select-more-border'
+                        id='${data['softs'][i]['id']}'
+                        option_name='${data['softs'][i]['name']}'
+                        onclick='handle_click_from_soft(this)'>
+                        <div class='col-xs-4'>
+                        <div class='img-box'>
+                        <img src=${pic_base_url + (data['softs'][i]['url'] ? data['softs'][i]['url'] : 'item.jpg')} alt=''>
+                        </div>
+                        </div>
+                        <div class='${parseInt(window.isMoreSelectSoft) ? 'col-xs-6' : 'col-xs-8'}'>
+                        ${is_open_pay_function == 1 || basic_is_show_object_price == 1 || (is_use_remainder_pay == 1 && is_open_mixed_payment == 1) ?
+                            `<h5>${data['softs'][i]['name']}( ${currency_symbol}${data['softs'][i]['price']})</h5>` :
+                            `<h5>${data['softs'][i]['name']}</h5>`}
+                        <div class='ui star rating' data-rating='3'>
+                        </div>
+                        <span>${data['softs'][i]['describe']}</span>
+                        </div>
+                        ${parseInt(window.isMoreSelectSoft) ? `
+                            <div class='col-xs-2'>
+                                <div class="g-select-input-border">
+                                    <div class="g-select-input-content"></div>
+                                </div>
+                            </div>
+                            `: ""}
+                        </div>
+                        ${is_open_pay_function == 1 || basic_is_show_object_price == 1 || (is_use_remainder_pay == 1 && is_open_mixed_payment == 1) ?
+                            `<input type='hidden' id='soft_price_${data['softs'][i]['id']}' value='${data['softs'][i]['price']}'/>` : ""}
+                        `
+                    }
+                } else {
+
+                    // 当该预约对象下没有预约可选项时，是否不显示整个框
+                    if (is_not_show_optional_device_and_soft == 1) {
+                        $('#optional_module_2').addClass('hide');
+                    }
+                    else {
+                        b += "<div class='row'><div class='blank'>该项下暂无数据</div></div>";
+                    }
+
+                }
+                $("#softs").append(b);
+            },
+        });
+    }
+</script>
+
+</body>
+
+</html>
